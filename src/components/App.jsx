@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { getImages, getImagesWithPagination } from 'services/api';
-import { getImagesWithParams } from 'services/api';
+import { getImages } from 'services/api';
 
 
 import { Searchbar } from './Searchbar/Searchbar';
@@ -15,7 +14,7 @@ export class App extends Component {
     img: null,
     modalImgURL: null,
     isModalOpen: false,
-    status: 'idle', // "idle" | "pending" | "success" | "error"
+    status: 'idle',
     error: null,
     searchParam: '',
     page: 1
@@ -81,6 +80,7 @@ export class App extends Component {
       }
     }
     fetchImages()
+
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -100,13 +100,12 @@ export class App extends Component {
         <Searchbar
         handleSearchSubmit={this.handleSearchSubmit}/>
         {this.state.status==='pending' && <Loader/>}
-
-        <ImageGallery
-        images={this.state.img}
-        searchParam={this.state.searchParam}
-        openModalWindow={this.openModalWindow}
-        />
-        {this.state.img>'12' && <Button handleLoadMore={this.handleLoadMore}/> }
+           <ImageGallery
+          images={this.state.img}
+          searchParam={this.state.searchParam}
+          openModalWindow={this.openModalWindow}
+          />
+        {this.state.img && <Button handleLoadMore={this.handleLoadMore}/> }
         {this.state.isModalOpen && 
         <Modal
         imgURL={this.state.modalImgURL}

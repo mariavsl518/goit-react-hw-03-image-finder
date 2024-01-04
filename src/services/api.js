@@ -13,31 +13,3 @@ export const getImages = async (searchParam='', page=1) => {
     const {data} = await axios.get(`https://pixabay.com/api/?${params}`)
     return data.hits;
 }
-
-// export const getImagesWithParams = async (searchParam) => {
-//     const params = new URLSearchParams({
-//         q: searchParam,
-//         page:1,
-//         key: '40689731-12a87d22ac6b1cbae7ac2a055',
-//         image_type: 'photo',
-//         orientation: 'horizontal',
-//         per_page: 12
-//     })
-    
-//     const {data} = await axios.get(`https://pixabay.com/api/?${params}`)
-//     return data.hits;
-// }
-
-// export const getImagesWithPagination = async(page) =>{
-//     const params = new URLSearchParams({
-//         q: '',
-//         page:1,
-//         key: '40689731-12a87d22ac6b1cbae7ac2a055',
-//         image_type: 'photo',
-//         orientation: 'horizontal',
-//         per_page: 12
-//     })
-    
-//     const {data} = await axios.get(`https://pixabay.com/api/?${params}`)
-//     return data.hits;
-// }
