@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { getImages } from 'services/api';
 
-
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
