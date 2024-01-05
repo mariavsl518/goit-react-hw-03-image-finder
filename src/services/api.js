@@ -11,5 +11,6 @@ export const getImages = async (searchParam='', page=1) => {
         per_page: 12
     })
     const {data} = await axios.get(`https://pixabay.com/api/?${params}`)
+    localStorage.setItem('resp', JSON.stringify(data))
     return data.hits;
 }

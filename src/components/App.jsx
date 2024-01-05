@@ -34,7 +34,7 @@ export class App extends Component {
 
   fetchImagesWithParams = async (searchParam) => {
     try{
-      this.setState({status:'pending'})
+      this.setState({status:'pending', img:null})
       const img = await getImages(searchParam, this.state.page);
       this.setState({img, status:'success'});
     }
@@ -95,17 +95,28 @@ export class App extends Component {
     }
 
   render() {
+
+    const totalHits = JSON.parse(localStorage.getItem('resp')).totalHits;
+
     return (
       <div>
         <Searchbar
         handleSearchSubmit={this.handleSearchSubmit}/>
+
         {this.state.status==='pending' && <Loader/>}
-           <ImageGallery
-          images={this.state.img}
-          searchParam={this.state.searchParam}
-          openModalWindow={this.openModalWindow}
-          />
-        {this.state.img && <Button handleLoadMore={this.handleLoadMore}/> }
+
+        <ImageGallery
+        images={this.state.img}
+        searchParam={this.state.searchParam}
+        openModalWindow={this.openModalWindow}
+        />
+
+        {(totalHits!==0&&this.state.status==='success') && 
+        <Button handleLoadMore={this.handleLoadMore}/>}
+
+        {totalHits===0 && <p className='errorTitle'>Nothing was found...</p>}
+        {this.state.status==='error'&& <p className='errorTitle'>Oops, some error occurred.. </p>}
+       
         {this.state.isModalOpen && 
         <Modal
         imgURL={this.state.modalImgURL}

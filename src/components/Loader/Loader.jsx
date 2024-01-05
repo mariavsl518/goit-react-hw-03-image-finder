@@ -1,11 +1,11 @@
 import React from 'react'
-import css from './Loader.module.css'
+// import css from './Loader.module.css'
 import { InfinitySpin } from 'react-loader-spinner'
 
 export const Loader = () => {
   return (
     <InfinitySpin
-    className={css.loader}
+    // className={css.loader}
     visible={true}
     width="600"
     color="#4E75B5"

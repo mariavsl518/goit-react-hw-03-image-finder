@@ -34,3 +34,10 @@ img {
   grid-gap: 16px;
   padding-bottom: 24px;
 }
+
+.errorTitle{
+  font-size: 25px;
+  color: darkblue;
+  text-align: center;
+  margin-top: 100px;
+}
