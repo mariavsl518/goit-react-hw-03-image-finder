@@ -63,23 +63,6 @@ export class App extends Component {
     this.setState({isModalOpen:false})
   }
   
-
-
-  componentDidMount() {
-    const fetchImages = async() =>{
-      try{
-        this.setState({status:'pending'})
-        const img = await getImages();
-        this.setState({img, status:'success'});
-      }
-      catch{
-        this.setState({status:'error'})
-      }
-    }
-    fetchImages()
-
-  }
-
   componentDidUpdate(prevProps, prevState){
 
     if(prevState.searchParam !== this.state.searchParam){
