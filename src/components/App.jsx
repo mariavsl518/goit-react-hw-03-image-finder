@@ -14,7 +14,6 @@ export class App extends Component {
     modalImgURL: null,
     isModalOpen: false,
     status: 'idle',
-    error: null,
     searchParam: '',
     page: 1
   }
@@ -57,7 +56,6 @@ export class App extends Component {
 
   openModalWindow = (key) =>{
     const elem =  this.state.img.find(elem=>elem.id===key)
-    console.log(elem.largeImageURL);
     this.setState({modalImgURL:elem.largeImageURL, isModalOpen:true})
   }
 
@@ -95,14 +93,14 @@ export class App extends Component {
 
   render() {
 
-    const totalHits = JSON.parse(localStorage.getItem('resp')).totalHits;
+    const totalHits = JSON.parse(localStorage.getItem('resp'))?.totalHits;
+    const shownHits = Array.isArray(this.state.img) ? this.state.img.length : undefined;
+    const showButton = totalHits!==0 && this.state.status==='success';
 
     return (
       <div>
         <Searchbar
         handleSearchSubmit={this.handleSearchSubmit}/>
-
-        {this.state.status==='pending' && <Loader/>}
 
         <ImageGallery
         images={this.state.img}
@@ -110,8 +108,10 @@ export class App extends Component {
         openModalWindow={this.openModalWindow}
         />
 
-        {(totalHits!==0&&this.state.status==='success') && 
-        <Button handleLoadMore={this.handleLoadMore}/>}
+        {this.state.status==='pending' && <Loader/>}
+
+        {(showButton && shownHits!==totalHits) && <Button handleLoadMore={this.handleLoadMore}/>
+        }
 
         {totalHits===0 && <p className='errorTitle'>Nothing was found...</p>}
         {this.state.status==='error'&& <p className='errorTitle'>Oops, some error occurred.. </p>}
